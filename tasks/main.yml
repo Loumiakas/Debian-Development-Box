@@ -1,0 +1,99 @@
+---
+- name: Installing apt packages
+  apt: 
+    name: "{{ item }}"
+    state: present 
+  loop: "{{ packages }}"
+
+- name: Installing vim dependencies
+  apt: 
+    name:
+    state: build-dep
+  loop:
+    - vim
+    - vim-gtk
+
+- name: "Creating VirtualBox group for user: {{ username }}"
+  group:
+    name: vboxusers
+    state: present
+
+- name: "Creating user account for user: {{ username }}"
+  user:
+    name: "{{ username }}"
+    password: "{{ password | password_hash('sha512') }}"
+    shell: /bin/zsh
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    ssh_key_file: .ssh/id_rsa
+    groups: 
+        - vboxusers
+        - cdrom 
+        - floppy
+        - sudo
+        - audio
+        - dip
+        - video
+        - plugdev
+        - netdev
+    expires: -1
+    
+- name: Enable X11 tunnelling
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#X11DisplayOffset 10'
+    line: X11DisplayOffset 10
+    
+- name: Enable X11 tunnelling
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#X11UseLocalhost yes'
+    line: X11UseLocalhost no
+
+- name: Cloning Vim repository
+  git:
+    repo: 'https://github.com/vim/vim.git'
+    dest: /tmp/vim
+    clone: yes
+    update: yes
+
+- name: Copying Vim setup script
+  copy:
+    src: files/setup_vim.sh
+    dest: /tmp/setup_vim.sh
+    mode: '0755'
+
+- name: Running Vim setup script
+  shell: /tmp/setup_vim.sh
+  
+- name: Copying tmux setup script
+  copy:
+    src: files/setup_tmux.sh
+    dest: /tmp/setup_tmux.sh
+    mode: '0755'
+
+- name: Running tmux setup script
+  shell: /tmp/setup_tmux.sh
+  
+- name: Cloning rfcat repository
+  git:
+    repo: 'https://github.com/atlas0fd00m/rfcat.git'
+    dest: "/opt/rfcat"
+    clone: yes
+    update: yes
+
+- name: Installing rfcat
+  shell: "pip install -e /opt/rfcat"
+
+- name: Cloning dotfiles
+  git:
+    repo: 'https://github.com/Loumiakas/dotfiles.git'
+    dest: "/home/{{ username }}/.dotfiles"
+    clone: yes
+    update: yes
+  become_user: "{{ username }}"
+
+- name: Installing dotfiles
+  shell: "/home/{{ username }}/.dotfiles/setup.sh"
+  become_user: "{{ username }}"
+...

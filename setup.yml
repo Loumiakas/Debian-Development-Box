@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  roles:
+    - setup
+  vars:
+   # username: <username>
+   # password: <password>
