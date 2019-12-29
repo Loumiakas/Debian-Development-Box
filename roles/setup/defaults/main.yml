@@ -1,0 +1,21 @@
+---
+
+packages:
+  - cscope
+  - ctags
+  - git
+  - ncurses-dev
+  - python-pip
+  - python2
+  - python2-dev
+  - python3
+  - python3-dev
+  - vim-gtk
+  - x11-apps
+  - x11-common
+  - x11-utils
+  - xclip 
+  - xorg-dev
+  - xorg-dev
+  - yum
+  - zsh
