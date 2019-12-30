@@ -9,7 +9,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "generic/debian10"
 
-  config.vm.synced_folder "../../../Desktop", "/home/vagrant/Desktop"
+  config.vm.synced_folder ".", "/vagrant"
 
   config.vm.network "private_network", ip: "192.168.56.4"
 
