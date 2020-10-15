@@ -7,7 +7,9 @@
 # you're doing.
 #
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/debian10"
+  config.vm.box = "ubuntu/xenial64"
+
+#  config.vbguest.auto_update = false
 
   config.vm.synced_folder ".", "/vagrant"
 
