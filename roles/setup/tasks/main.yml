@@ -50,6 +50,12 @@
     regexp: '^#X11UseLocalhost yes'
     line: X11UseLocalhost no
 
+- name: Enable X11 tunnelling
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: 'PasswordAuthentication no'
+    line: PasswordAuthentication yes
+
 - name: Cloning Vim repository
   git:
     repo: 'https://github.com/vim/vim.git'
@@ -75,6 +81,9 @@
 - name: Running tmux setup script
   shell: /tmp/setup_tmux.sh
   
+- name: Updating pip
+  shell: pip install --upgrade pip
+
 - name: Cloning rfcat repository
   git:
     repo: 'https://github.com/atlas0fd00m/rfcat.git'
