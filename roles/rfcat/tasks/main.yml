@@ -21,15 +21,8 @@
     src: /opt/sdcc-3.5.0.tar.bz2
     dest: /opt
 
-- name: update .env file
-  lineinfile:
-    path: "/home/{{ username }}/.env"
-    regexp: 'PATH=$PATH:/opt/sdcc-3.5.0/bin'
-    line: 'PATH=$PATH:/opt/sdcc-3.5.0/bin'
-    owner: "{{ username}}"
-    group: "{{ username}}"
-    state: present
-    create: yes
-    mode: 0777
-    
+- name: symbolically link sdcc
+  shell: | 
+    ln -s /opt/sdcc-3.5.0/bin/* /usr/local/bin
+    ln -s /opt/sdcc-3.5.0/share/* /usr/local/share
 ...
