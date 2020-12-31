@@ -3,7 +3,7 @@ cd /tmp/vim
 make clean
 ./configure \
     --enable-perlinterp=dynamic \
-    --enable-pythoninterp=dynamic \
+    --enable-python3interp=dynamic \
     --enable-rubyinterp=dynamic \
     --enable-cscope \
     --enable-gui=auto \
@@ -12,6 +12,6 @@ make clean
     --with-features=huge \
     --with-x \
     --with-compiledby="Loumiakas <loumiakas1@gmail.com>" \
-    --with-python-config-dir=/usr/lib/python2.7/config-$(uname -m)-linux-gnu
+    --with-python3-config-dir=$(python3-config --configdir)
 make -j8
 make install

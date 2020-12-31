@@ -82,17 +82,7 @@
   shell: /tmp/setup_tmux.sh
   
 - name: Updating pip
-  shell: pip install --upgrade pip
-
-- name: Cloning rfcat repository
-  git:
-    repo: 'https://github.com/atlas0fd00m/rfcat.git'
-    dest: "/opt/rfcat"
-    clone: yes
-    update: yes
-
-- name: Installing rfcat
-  shell: "pip install -e /opt/rfcat"
+  shell: pip3 install --upgrade pip
 
 - name: Cloning dotfiles
   git:

@@ -1,1 +1,1 @@
-# Ubuntu development box
+# Debian development box

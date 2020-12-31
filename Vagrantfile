@@ -7,7 +7,8 @@
 # you're doing.
 #
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "generic/debian10"
+  config.ssh.insert_key = false
 
 #  config.vbguest.auto_update = false
 
@@ -24,6 +25,14 @@ Vagrant.configure("2") do |config|
 
     # Customize the amount of memory on the VM:
     vb.memory = "4096"
+
+    # Enable USB and enable YARDStick One
+    vb.customize ["modifyvm", :id, "--usb", "on"]
+    vb.customize ["modifyvm", :id, "--usbehci", "on"]
+    vb.customize ["usbfilter", "add", "0",
+        "--target", :id,
+        "--name", "YARDStick",
+        "--product", "YARD Stick One"]
   end
 
   config.vm.provision "shell", path: "setup.sh"
