@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  roles:
+    - rfcat
+  vars:
+    username: <username>

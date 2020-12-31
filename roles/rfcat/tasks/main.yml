@@ -1,0 +1,35 @@
+---
+- name: clone rfcat repository
+  git: 
+    repo: https://github.com/atlas0fd00m/rfcat.git
+    dest: /opt/rfcat
+    version: master
+
+- name: install dependencies
+  shell: |
+    pip install -r /opt/rfcat/requirements.txt
+    pip install "jedi<0.18.0"
+  
+- name: download sdcc 3.5.0
+  get_url:
+    url: https://netactuate.dl.sourceforge.net/project/sdcc/sdcc-linux-x86/3.5.0/sdcc-3.5.0-i386-unknown-linux2.5.tar.bz2
+    dest: /opt/sdcc-3.5.0.tar.bz2
+    mode: 0755
+
+- name: extract sdcc
+  unarchive:
+    src: /opt/sdcc-3.5.0.tar.bz2
+    dest: /opt
+
+- name: update .env file
+  lineinfile:
+    path: "/home/{{ username }}/.env"
+    regexp: 'PATH=$PATH:/opt/sdcc-3.5.0/bin'
+    line: 'PATH=$PATH:/opt/sdcc-3.5.0/bin'
+    owner: "{{ username}}"
+    group: "{{ username}}"
+    state: present
+    create: yes
+    mode: 0777
+    
+...
