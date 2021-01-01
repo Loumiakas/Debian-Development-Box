@@ -9,6 +9,7 @@
   shell: |
     pip install -r /opt/rfcat/requirements.txt
     pip install "jedi<0.18.0"
+    ln -s /opt/rfcat/rfcat /usr/local/bin/rfcat
   
 - name: download sdcc 3.5.0
   get_url:

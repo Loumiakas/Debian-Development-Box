@@ -26,13 +26,24 @@ Vagrant.configure("2") do |config|
     # Customize the amount of memory on the VM:
     vb.memory = "4096"
 
-    # Enable USB and enable YARDStick One
+    # Enable USB
     vb.customize ["modifyvm", :id, "--usb", "on"]
     vb.customize ["modifyvm", :id, "--usbehci", "on"]
+    # YARDStick One
     vb.customize ["usbfilter", "add", "0",
         "--target", :id,
-        "--name", "YARDStick",
+        "--name", "YARDStick One",
         "--product", "YARD Stick One"]
+    # HackRF One
+    vb.customize ["usbfilter", "add", "1",
+        "--target", :id,
+        "--name", "HackRF One",
+        "--product", "HackRF One"]
+    # Ubertooth One
+    vb.customize ["usbfilter", "add", "2",
+        "--target", :id,
+        "--name", "Ubertooth One",
+        "--product", "Ubertooth One"]
   end
 
   config.vm.provision "shell", path: "setup.sh"
