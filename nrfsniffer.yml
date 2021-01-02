@@ -2,5 +2,3 @@
 - hosts: localhost
   roles:
     - nrfsniffer
-  vars:
-    username: loumiakas
