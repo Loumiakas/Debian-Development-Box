@@ -36,6 +36,7 @@
         - video
         - plugdev
         - netdev
+        - dialout
     expires: -1
     
 - name: Enable X11 tunnelling

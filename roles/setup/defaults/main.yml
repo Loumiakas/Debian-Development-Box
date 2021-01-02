@@ -1,9 +1,11 @@
 ---
 
 packages:
+  - arduino
   - bluez
   - cscope
   - ctags
+  - esptool
   - git
   - hackrf
   - inspectrum
