@@ -44,6 +44,12 @@ Vagrant.configure("2") do |config|
         "--target", :id,
         "--name", "Ubertooth One",
         "--product", "Ubertooth One"]
+    # JLink Segger
+    vb.customize ["usbfilter", "add", "3",
+        "--target", :id,
+        "--name", "JLink Bluetooth Devboard",
+        "--product", "J-Link",
+        "--manufacturer", "SEGGER"]
   end
 
   config.vm.provision "shell", path: "setup.sh"

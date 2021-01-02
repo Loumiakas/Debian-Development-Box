@@ -26,4 +26,14 @@
   shell: | 
     ln -s /opt/sdcc-3.5.0/bin/* /usr/local/bin
     ln -s /opt/sdcc-3.5.0/share/* /usr/local/share
+
+- name: enable usb access without elevated privileges
+  lineinfile:
+    create: yes
+    group: root
+    line: 'SUBSYSTEM=="usb",MODE="0666"'
+    mode: '0644'
+    owner: root
+    path: /etc/udev/rules.d/usb.rules
+    regexp: 'SUBSYSTEM=="usb",MODE="0666"'
 ...
