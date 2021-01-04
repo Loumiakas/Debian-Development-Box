@@ -102,6 +102,13 @@ Vagrant.configure("2") do |config|
         "--productid", "0x0486",
         "--product", "Teensyduino RawHID",
         "--manufacturer", "Teensyduino"]
+    # USB Bluetooth dongle
+    vb.customize ["usbfilter", "add", "10",
+        "--target", :id,
+        "--name", "Bluetooth Dongle",
+        "--vendorid", "0x0a12",
+        "--productid", "0x0001",
+        "--manufacturer", "Cambridge Silicon Radio, Ltd"]
   end
 
   config.vm.provision "shell", path: "setup.sh"
