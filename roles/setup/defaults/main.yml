@@ -33,5 +33,5 @@ packages:
   - xclip 
   - xorg-dev
   - xorg-dev
-  - yum
+  - xterm
   - zsh
